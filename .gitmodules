@@ -9,4 +9,4 @@
 	url = https://github.com/heristop/sfCombinePlugin.git
 [submodule "plugins/csDoctrineActAsSortablePlugin"]
 	path = plugins/csDoctrineActAsSortablePlugin
-	url = git://github.com/bshaffer/csDoctrineActAsSortablePlugin.git
+	url = https://github.com/bshaffer/csDoctrineActAsSortablePlugin.git
