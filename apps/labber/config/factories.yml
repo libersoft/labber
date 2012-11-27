@@ -1,0 +1,77 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/05-Factories
+
+extdirect:
+  controller:
+    class: dsExtDirectController
+  logger:
+    class:   sfAggregateLogger
+    param:
+      level:   notice
+      loggers:
+        sf_web_debug:
+          class: sfNoLogger
+        sf_file_debug:
+          class: sfFileLogger
+          param:
+            level: notice
+            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
+
+prod:
+  logger:
+    class:   sfAggregateLogger
+    param:
+      level:   warning
+      loggers:
+        sf_web_debug:
+          class: sfNoLogger
+        sf_file_debug:
+          class: sfFileLogger
+          param:
+            level: warning
+            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
+
+test:
+  response:
+    class: sfWebResponse
+    param:
+      send_http_headers: false
+
+  mailer:
+    param:
+      delivery_strategy: none
+
+dev:
+  mailer:
+    param:
+      delivery_strategy: none
+  logger:
+    class:   sfAggregateLogger
+    param:
+      level:   notice
+      loggers:
+        sf_web_debug:
+          class: sfNoLogger
+        sf_file_debug:
+          class: sfFileLogger
+          param:
+            level: notice
+            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
+
+all:
+  routing:
+    class: sfPatternRouting
+    param:
+      generate_shortest_url:            true
+      extra_parameters_as_query_string: true
+
+  view_cache_manager:
+    class: sfViewCacheManager
+    param:
+      cache_key_use_vary_headers: true
+      cache_key_use_host_name:    true
+
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name: labber_sessionami

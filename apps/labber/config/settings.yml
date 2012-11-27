@@ -1,0 +1,78 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    no_script_name:         false
+    logging_enabled:        false
+    cache:                  true
+    etag:                   true
+
+dev:
+  .settings:
+    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    web_debug:              false
+    cache:                  false
+    no_script_name:         false
+    etag:                   false
+
+test:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    cache:                  false
+    web_debug:              false
+    no_script_name:         false
+    etag:                   false
+
+all:
+  .settings:
+    # Form security secret (CSRF protection)
+    csrf_secret:            41ee95b64c4b7ff399a3e304bc8400f4212bb50e
+
+    # Output escaping settings
+    escaping_strategy:      true
+    escaping_method:        ESC_JS_NO_ENTITIES
+
+    # Enable the database manager
+    use_database:           true
+
+    enabled_modules:
+      - default
+      - sfCombine
+      - sfGuardAuth
+      - lsLabberGuardAuth
+      - lsLabberMain
+      - lsLabberDb
+      - lsLabberConfigurations
+      - lsLabberBill
+      - lsLabberDenomination
+      - lsLabberDetermination
+      - lsLabberDeterminationType
+      - lsLabberFieldType
+      - lsLabberLimits
+      - lsLabberMatrix
+      - lsLabberMethod
+      - lsLabberOffer
+      - lsLabberOfferSection
+      - lsLabberOrder
+      - lsLabberPacket
+      - lsLabberPdf
+      - lsLabberSample
+      - lsLabberSampleType
+      - lsLabberUser
+      - lsLabberPrintCSV
+
+    # i18n
+    default_culture:        it_IT
+    i18n:                   true
+    charset:                utf-8
+    default_timezone:       Europe/Rome
+
+    timeout:                28800
+
+  .actions:
+    login_module:           lsLabberGuardAuth
+    login_action:           signin
+
+    secure_module:          lsLabberGuardAuth
+    secure_action:          secure

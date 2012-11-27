@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Esegue task di symfony non distruttivi ad ogni merge.
+# cp data/git/post-merge .git/hooks/post-merge
+# chmod +x .git/hooks/post-merge
+# ./.git/hooks/post-merge
+
+echo '=== post-merge ==='
+echo 'extdirect:generate-api'
+php symfony -q extdirect:generate-api labber
+echo 'optimize:assets'
+php symfony -q optimize:assets labber --type=all --env=prod
+echo 'doctrine:compile'
+php symfony -q doctrine:compile --driver=mysql lib/doctrine.compiled.php
+echo 'cc'
+php symfony -q cc

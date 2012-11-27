@@ -1,0 +1,33 @@
+/* 
+    Document   : custom
+    Created on : 31-mar-2010, 15.33.13
+    Author     : scorp
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.ux-mselect {
+    overflow: auto;
+}
+
+.button-new {
+    background-image: url('../images/icons/calendar--plus.png') !important;
+}
+.button-remove {
+    background-image: url('../images/icons/calendar--minus.png') !important;
+}
+.button-reload {
+    background-image: url('../images/icons/arrow-circle-double-135.png') !important;
+}
+
+.button-filterday {
+    background-image: url('../images/icons/calendar-select.png') !important;
+}
+.button-filterweek {
+    background-image: url('../images/icons/calendar-select-week.png') !important;
+}

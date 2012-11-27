@@ -1,0 +1,73 @@
+SfGuardUser:
+  admin:
+    id: 1
+    username: admin
+    algorithm: sha1
+    salt: a7f7c66b98ca6a84407d661aadfd3e8e
+    password: admin
+    is_active: 1
+    is_super_admin: 1
+
+User:
+  admin:
+    id: 1
+    name: 
+    surname: Amministratore
+    status: 
+    tax_code: 
+    birth_date: 
+    titles: 
+    in_sales: 0
+    guard_user_id: 1
+    department_id: 1 
+
+SfGuardGroup:
+  admin:
+    name: admin
+    description: Administrator Group
+
+SfGuardPermission:
+  admin:
+    id: 1
+    name: admin
+    description: Administrator permission
+  controlli:
+    id: 2
+    name: controlli
+    description: Controlli
+  commerciale:  
+    id: 3
+    name: commerciale
+    description: Commerciale
+  accettazione:
+    id: 4
+    name: accettazione
+    description: Accettazione
+  laboratorio:  
+    id: 5
+    name: laboratorio
+    description: Laboratorio
+  configurazione:  
+    id: 6  
+    name: configurazione
+    description: Configurazione
+
+SfGuardUserPermission:
+  admin1:
+    user_id: 1
+    permission_id: 1
+  admin2:
+    user_id: 1
+    permission_id: 2
+  admin3:
+    user_id: 1
+    permission_id: 3
+  admin4:
+    user_id: 1
+    permission_id: 4
+  admin5:
+    user_id: 1
+    permission_id: 5
+  admin6:
+    user_id: 1
+    permission_id: 6

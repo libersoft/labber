@@ -1,0 +1,1223 @@
+# TODO: eliminare
+actAs: [Timestampable]
+
+# Opzioni del DB
+options:
+  collate: utf8_unicode_ci
+  charset: utf8
+
+# Doctrine Migrate
+MigrationVersion:
+  columns:
+    version: {  type: int(11) }
+
+# Tecnica analitica
+AnalyticalTechnique:
+  columns:
+    name:                   { type: string(255) }
+    code:                   { type: string(255) }
+    description:            { type: clob }
+
+# Fattura
+Bill:
+  columns:
+    number:
+      type: string
+    contact_id:
+      type: integer
+      notnull: true
+    sent_at:
+      type: date
+    payment_conditions:
+      type: string
+    currency:
+      type: string
+    notes:
+      type: string
+  relations:
+    Contact:
+      local: contact_id
+    Samples:
+      type: many
+      class: Sample
+      local: id
+      foreign: bill_id
+
+# Tabella ausiliaria per salvare variabili persistenti
+Configurations:
+  columns:
+    name:                   { type: string(255), unique: true }
+    value:                  { type: string(255) }
+
+# Contatto principale
+Contact:
+  columns:
+    name:                     string(255)
+    alias:                    string(255)
+
+    address:                  string(255)
+    city:                     string(255)
+    province:                 string(2)
+    cap:                      string(5)
+    piva:                     string(20)
+    taxid:                    string(20)
+    telephone:                string(50)
+    fax:                      string(50)
+    email:                    string(500)
+
+    note_offer:               { type: clob }
+    note_order:               { type: clob }
+
+# Indirizzi alternativi collegati al contatto p.
+ContactAddress:
+  columns:
+    parent_id:                { type: integer }
+    contact_id:               { type: integer }
+    name:                     string(255)
+    alias:                    string(255)
+
+    address:                  string(255)
+    city:                     string(255)
+    province:                 string(2)
+    cap:                      string(5)
+
+    telephone:                string(50)
+    cellphone:                string(50)
+    fax:                      string(50)
+    email:                    string(500)
+
+    is_rdp:                   { type: boolean, default: false }
+    is_invoice:               { type: boolean, default: false }
+  relations:
+    Contact:
+      local: parent_id
+      foreignAlias: getChildren
+
+# Denominazione
+Denomination:
+  columns:
+    name:
+      type:     string(255)
+      unique:   true
+      notnull:  true
+    short_name:
+      type:     string(64)
+    cas:
+      type:     string(255)
+    notes:
+      type:     clob
+    unconfirmed:
+      type:     boolean
+      default:  true
+    aliases:                    # a JSON containing denomination's aliases
+      type:     clob
+    group_id:
+      type:     integer
+  relations:
+    Group:
+      class: DenominationsGroup
+      local: group_id
+
+# Gruppo di denominazioni
+DenominationsGroup:
+  columns:
+    name:
+      type:     string(255)
+      notnull:  true
+      unique:   true
+
+# Laboratorio
+Department:
+  columns:
+    name:                     { type: string(255) }
+    code:                     { type: string(255) }
+    lab_id:                   { type: integer }
+    manager_id:               { type: integer }
+    # TODO: eliminare
+    split_sample_number:      { type: integer }
+    # note fisse per reparto da mettere nel report
+    report_header:            { type: clob }
+    report_footer:            { type: clob }
+    det_status_id:            { type: integer }
+    ss_status_id:             { type: integer }
+  relations:
+    Lab:
+      local:                  lab_id
+    DeterminationStatus:
+      local:                  det_status_id
+    Manager:
+      local:                  manager_id
+      class:                  User
+
+# Controllo
+Determination:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    # relazioni
+    denomination_id:
+      type: integer
+    method_id:
+      type: integer
+    matrix_id:
+      type: integer
+    packet_id:
+      type: integer
+    sample_id:
+      type: integer
+    offer_section_id:
+      type: integer
+    scale_id:
+      type: integer
+    um_id:
+      type: integer
+    # caratteristiche
+    cifre_decimali:
+      type: integer
+    cifre_significative:
+      type: integer
+    loq:
+      type: string(255)
+    lod:
+      type: string(255)
+    incertezza:
+      type: string(255)
+    recupero:
+      type: string(255)
+    limiti:
+      type: string(255)
+    denomination_alias:
+      type: string(255)
+    is_sinal:
+      type: boolean
+    # proprieta'
+    tipo_controllo:
+      type: enum
+      values: [ 'Controllo Semplice', 'Controllo Formula', 'Titolo' ]
+      default: 'Controllo Semplice'
+    data_inizio:
+      type: date
+    data_fine:
+      type: date
+    data_scadenza:
+      type: date
+    priorita:
+      type: integer
+      default: 4
+    nota_report:
+      type: clob
+    nota_laboratorio:
+      type: clob
+    # Questi andranno integrati nella gestione della formula
+    risultato_formattato:
+      type: string(255)
+    valore_inserito:
+      type: string(255)
+    params:
+      type: clob
+    constants:
+      type: clob
+    # un clob nel quale scrivo quando faccio la _set di alcuni campi
+    storico:
+      type: clob
+    stampa:
+      type: boolean
+      default: true
+    conforme:
+      type: boolean
+      default: true
+    # per ordinare le righe sul report
+    numriga_report:
+      type: integer
+    origine:
+      type: string(255)
+    # il nome del pacchetto "contenitore"
+    pdp:
+      type: string(255)
+    price:
+      type: decimal
+      scale: 2
+    days:
+      type: integer(2)
+    offered_price:
+      type: decimal
+      scale: 2
+    # JSON per l'origine del controllo (OfferSection/Packet/DeterminationType)
+    source:
+      type: string(255)
+    rdp_title:
+      type: string(255)
+  relations:
+    Denomination:
+      local:                denomination_id
+      foreignAlias:         Determinations
+    Method:
+      local:                method_id
+      foreignAlias:         Determinations
+    Matrix:
+      local:                matrix_id
+      foreignAlias:         Determinations
+    Packet:
+      local:                packet_id
+      onDelete:             CASCADE
+      foreignAlias:         Determinations
+    OfferSection:
+      local:                offer_section_id
+      onDelete:             CASCADE
+      foreignAlias:         Determinations
+    Scale:
+      class:                SIPrefix
+      local:                scale_id
+    UnitOfMeasurement:
+      local:                um_id
+
+#
+DeterminationStatus:
+  columns:
+    name:                   { type: string(255) }
+    description:            { type: clob }
+    next_status_id:         { type: integer }
+    department_id:          { type: integer }
+    is_validated:           { type: boolean, default: false }
+  relations:
+    NextStatus:
+      class:                DeterminationStatus
+      local:                next_status_id
+    Department:
+      local:                department_id
+
+# Tabella di cache
+DeterminationType:
+  actAs:                      []
+  columns:
+    method_id:                { type: integer }
+    matrix_id:                { type: integer }
+    denomination_id:          { type: integer }
+    price_modifier:           { type: decimal, scale: 2, default: 1 }
+    is_default:               { type: boolean }
+    is_preview:               { type: boolean, default: true }
+    is_sinal:                 { type: boolean }
+    um_id:                    { type: integer }
+    scale_id:                 { type: integer }
+    significant_digits:       { type: integer }
+    max_decimal_digits:       { type: integer }
+    notes:                    { type: clob }
+    price:                    { type: decimal, scale: 2 }
+    min_price:                { type: decimal, scale: 2 }
+    days:                     { type: integer(2) }
+    department_id:            { type: integer }
+    is_external:              { type: boolean, default: false }
+  relations:
+    Denomination:
+      local:                  denomination_id
+    Matrix:
+      local:                  matrix_id
+    Method:
+      local:                  method_id
+      onDelete:               CASCADE
+    SIPrefix:
+      local:                  scale_id
+    UnitOfMeasurement:
+      local:                  um_id
+    Department:
+      local:                  department_id
+
+# Parametri della determination type
+# si chiamavano campi/fields e questa cosa ce la
+# stiamo portando dietro nel db...
+DeterminationTypeField:
+  actAs:                      []
+  columns:
+    determination_type_id:    { type: integer }
+    field_type_id:            { type: integer }
+    value:                    { type: string(255) }
+    is_default:               { type: boolean }
+    is_sinal:                 { type: boolean, default: true }
+  relations:
+    DeterminationType:
+      local:                  determination_type_id
+      foreignAlias:           Fields
+      onDelete:               CASCADE
+    FieldType:
+      local:                  field_type_id
+      foreignAlias:           DeterminationTypes
+
+#
+DeterminationTypeMethodConstant:
+  actAs:                      []
+  columns:
+    determination_type_id:    { type: integer }
+    method_constant_id:       { type: integer }
+    value:                    { type: string(255) }
+  relations:
+    DeterminationType:
+      local:                  determination_type_id
+      foreignAlias:           Constants
+      onDelete:               CASCADE
+    MethodConstant:
+      local:                  method_constant_id
+      foreignAlias:           DeterminationTypes
+
+# Un addetto (al prelievo, al campionamento, ...)
+Employee:
+  columns:
+    name:
+      type: string(255)
+      unique: true
+      notnull: true
+    nome:
+      type: string(255)
+    cognome:
+      type: string(255)
+    azienda:
+      type: string(255)
+    telefono:
+      type: string(255)
+
+# Parametro
+FieldType:
+  actAs:
+    Timestampable:              ~
+    Sluggable:
+      fields:                   [ name ]
+  columns:
+    name:                     { type: string(255), unique: true }
+    description:              { type: clob }
+    validator:                { type: clob }
+
+# Laboratorio
+Lab:
+  columns:
+    name:                   { type: string(255) }
+    code:                   { type: string(255) }
+    manager_id:             { type: integer }
+  relations:
+    Manager:
+      local:                manager_id
+      class:                User
+
+# Tabella limiti
+LimitsGroup:
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+    certified_name:
+      type: string(255)
+    unconfirmed:
+      type: boolean
+      default: false
+  relations:
+    Limits:
+      type:     many
+      class:    Limit
+      local:    id
+      foreign:  group_id
+      foreignAlias: Group
+      onDelete: CASCADE
+
+# Singolo limite
+Limit:
+  tableName: limit_table
+  actAs:
+    Timestampable: ~
+    Sortable:
+      uniqueBy: [group_id]
+  columns:
+    group_id:
+      type: integer
+    denomination_id:
+      type: integer
+    denomination_alias:
+      type: string(255)
+    prefix_id:
+      type: integer
+    unit_id:
+      type: integer
+    value:
+      type: string
+  indexes:
+    onedenominationpergroup:
+      fields: [group_id, denomination_id]
+      type:   unique
+  relations:
+    Denomination:
+      local: denomination_id
+      foreignAlias: Limits
+    Prefix:
+      class: SIPrefix
+      local: prefix_id
+    Unit:
+      class: UnitOfMeasurement
+      local: unit_id
+
+# Matrice
+Matrix:
+  columns:
+    name:                   { type: string(255), unique: true }
+    category:               { type: string(255), default: matrix }
+    description:            { type: clob }
+    note:                   { type: clob }
+    unconfirmed:            { type: boolean, default: false }
+    department_id:          { type: integer }
+    parent_id:              { type: integer }
+  relations:
+    Department:
+      local:                department_id
+      foreignAlias:         Matrixes
+    Parent:
+      class:                Matrix
+      local:                parent_id
+      foreign:              id
+      foreignAlias:         Submatrices
+
+#
+MatrixSampleType:
+  columns:
+    matrix_id:              { type: integer, primary: true }
+    sample_type_id:         { type: integer, primary: true }
+  relations:
+    Matrix:
+      local:                matrix_id
+    SampleType:
+      local:                sample_type_id
+
+# Metodo
+Method:
+  columns:
+    name:                   { type: string(512) }
+    short_name:             { type: string(255) }
+    # l'ente che ha creato il metodo
+    organization_id:        { type: integer, notnull: true }
+    description:            { type: clob }
+    # la norma alla quale fa riferimento il metodo
+    law:                    { type: string(255) }
+    revision:               { type: string(255) }
+    # vediamo se il metodo e' deprecato
+    not_active:             { type: boolean }
+    # mettiamo la possibilita' di allegare UN file a questo metodo
+    file:                   { type: string(255) }
+    discretePrice:          { type: decimal, scale: 2 }
+    # da Federico
+    year:                   { type: string(255) }
+    sinal_name:             { type: string(255), notnull: true }
+    internal_number:        { type: string(255) }
+    #um
+    #campo price da eliminare
+    price:                  { type: decimal, scale: 2 }
+    cost:                   { type: decimal, scale: 2 }
+    days:
+      type: integer(2)
+      default: 15
+    estimate_days:
+      type: integer(2)
+    # valori di default di LOQ e LOD
+    loq:
+      type: decimal
+      scale: 5
+    lod:
+      type: decimal
+      scale: 5
+    um_id:                  { type: integer }
+    prefix_id:              { type: integer }
+    department_id:          { type: integer }
+    report_footer:          { type: clob }
+    significant_digits:     { type: integer }
+    max_decimal_digits:     { type: integer }
+    analytical_technique_id: { type: integer }
+    unit_id:
+      type: integer
+    unconfirmed:
+      type:     boolean
+      default:  false
+  relations:
+    AnalyticalTechnique:
+      local:                analytical_technique_id
+    UnitOfMeasurement:
+      local:                um_id
+    Organization:
+      local:                organization_id
+    SIPrefix:
+      local:                prefix_id
+    Department:
+      local:                department_id
+      foreignAlias:         Methods
+    ReportColumns:
+      class:                ReportColumn
+      refClass:             MethodReportColumn
+      local:                method_id
+      foreign:              report_column_id
+      foreignAlias:         Methods
+    Constants:
+      local:                method_id
+      foreign:              method_constant_id
+      refClass:             MethodMethodConstant
+      class:                MethodConstant
+      foreignAlias:         Methods
+    Unit:
+      foreignAlias:         Methods
+    Fields:
+      local:                method_id
+      foreign:              field_type_id
+      refClass:             MethodField
+      class:                FieldType
+      foreignAlias:         Methods
+      onDelete:             CASCADE
+    Denominations:
+      local:                method_id
+      foreign:              denomination_id
+      refClass:             MethodDenomination
+      class:                Denomination
+      foreignAlias:         Methods
+    UMs:
+      local:                method_id
+      foreign:              unit_of_measurement_id
+      refClass:             MethodUnitOfMeasurement
+      class:                UnitOfMeasurement
+      foreignAlias:         AssociatedMethods
+
+# Costante
+MethodConstant:
+  actAs:
+    Sluggable:
+      fields:               [ name ]
+  columns:
+    name:                   { type: string(255) }
+    description:            { type: clob }
+    department_id:          { type: integer }
+  relations:
+    Department:
+      local:                department_id
+
+#
+MethodDenomination:
+  columns:
+    method_id:              { type: integer, primary: true }
+    denomination_id:        { type: integer, primary: true }
+    alias:                  { type: string(255) }
+  relations:
+    Method:
+      local:                method_id
+      foreign:              id
+      onDelete:             CASCADE
+    Denomination:
+      local:                denomination_id
+      foreign:              id
+      onDelete:             CASCADE
+
+#
+MethodField:
+  columns:
+    id:                     { type: integer }                 # finto
+    method_id:              { type: integer, primary: true }
+    field_type_id:          { type: integer, primary: true }
+    mandatory:              { type: boolean }
+  relations:
+    FieldType:
+      local:                field_type_id
+      onDelete:             CASCADE
+    Method:
+      local:                method_id
+      onDelete:             CASCADE
+
+# Allegato di un metodo
+MethodFile:
+  columns:
+    file:                   { type: string(255) }
+    description:            { type: clob }
+    method_id:              { type: integer }
+    #ash per salvare piu' file con stesso nome?
+  relations:
+    Method:
+      foreignAlias:         Files
+      onDelete:             CASCADE
+
+#
+MethodMatrix:
+  columns:
+    method_id:              { type: integer }
+    matrix_id:              { type: integer }
+    is_default:             { type: boolean }
+  indexes:
+    mm:
+      fields:               [ method_id, matrix_id ]
+      type:                 unique
+  relations:
+    Method:
+      local:                method_id
+      foreignAlias:         Matrixes
+      onDelete:             CASCADE
+    Matrix:
+      local:                matrix_id
+
+#
+MethodMethodConstant:
+  columns:
+    method_id:              { type: integer, primary: true }
+    method_constant_id:     { type: integer, primary: true }
+  relations:
+    Method:
+      local:                method_id
+      foreign:              id
+      onDelete:             CASCADE
+    MethodConstant:
+      local:                method_constant_id
+      foreign:              id
+      onDelete:             CASCADE
+
+# Regola di un metodo
+MethodRule:
+  columns:
+    method_id:              { type: integer }
+    matrix_ids:             { type: clob }
+    denomination_ids:       { type: clob }
+    action:                 { type: string(255) }
+    value:                  { type: clob }
+  relations:
+    Method:
+      local:                method_id
+      foreignAlias:         Rules
+      onDelete:             CASCADE
+
+# una colonna per i repor generati con questo metodo
+# ad esempio risultato e' una colonna del report
+# ma anche incertezza
+# ma anche loq
+# ma anche recupero... ecc ecc
+MethodReportColumn:
+  columns:
+    method_id:              { type: integer, primary: true }
+    report_column_id:       { type: integer, primary: true }
+  relations:
+    ReportColumn:
+      local:                report_column_id
+      foreign:              id
+      onDelete:             CASCADE
+    Method:
+      local:                method_id
+      foreign:              id
+      onDelete:             CASCADE
+
+# Associazione tra Method e UnitOfMeasurement per la modifica
+# dell'unità di misura di un Controllo in Accettazione. Viene
+# popolata dalla UnitOfMeasurement "di default" alla creazione di un
+# nuovo Method.
+MethodUnitOfMeasurement:
+  columns:
+    id:                     { type: integer, primary: true, autoincrement: true }
+    method_id:              { type: integer }
+    prefix_id:              { type: integer }
+    unit_of_measurement_id: { type: integer }
+    is_default:             { type: boolean, default: false }
+  indexes:
+    mpu:
+      fields:               [ method_id, prefix_id, unit_of_measurement_id ]
+      type:                 unique
+  relations:
+    Method:
+      local:                method_id
+      onDelete:             CASCADE
+    Prefix:
+      class:                SIPrefix
+      local:                prefix_id
+    UnitOfMeasurement:
+      local:                unit_of_measurement_id
+
+# un offerta/preventivo da cui parte tutto; contiene delle sezioni
+Offer:
+  columns:
+    number:                 { type: string(255) }
+    name:                   { type: string(255) }
+    note:                   { type: clob }
+    contact_id:             { type: integer }
+    protocol_number:        { type: string(255) }
+    emission_date:          { type: date }
+    validity_date:          { type: date }
+    expire_date:            { type: date }
+    # per i prezzi
+    price:                  { type: decimal, scale: 2 }
+    sales_manager_id:       { type: integer }
+    sales_secretary_id:     { type: integer }
+    technical_manager_id:   { type: integer }
+    technical_manager:      { type: string(255) }
+    is_template:            { type: boolean, default: false }
+    offer_state:            { type: integer(2), default: 0 }
+    contact_reference:      { type: string(255) }
+    confirm_date:           { type: date }
+    additional_condition:   { type: string(255) }
+    billing_modality:       { type: integer(2) }
+    payment_modality:       { type: integer(2) }
+    revision_number:        { type: integer }
+    history:                { type: clob }
+  relations:
+    Contact:
+      local:                contact_id
+      foreign:              id
+      foreignAlias:         Offers
+    SalesManager:
+      class:                User
+      local:                sales_manager_id
+    SalesSecretary:
+      class:                User
+      local:                sales_secretary_id
+    TechnicalManager:
+      class:                User
+      local:                technical_manager_id
+
+# Sezione di offerta
+OfferSection:
+  columns:
+    title:                  { type: string(255) }
+    section_number:         { type: integer }
+    price:                  { type: decimal, scale: 2 }
+    days:                   { type: integer(2) }
+    numbers_sample:         { type: integer(2), default: 1 }
+    offered_price:          { type: decimal, scale: 2 }
+    note:                   { type: clob }
+    is_proto:               { type: boolean, default: false }
+    offer_id:               { type: integer }
+    sample_type_id:         { type: integer }
+    limits_group_id:        { type: integer }
+    rdp_id:                 { type: integer }
+    matrix_id:              { type: integer }
+    submatrix_id:           { type: integer }
+  relations:
+    LimitsGroup:
+      local:                limits_group_id
+      onDelete:             SET NULL
+    Offer:
+      local:                offer_id
+      onDelete:             CASCADE
+      foreignAlias:         OfferSections
+    SampleType:
+      local:                sample_type_id
+    Rdp:
+      class:                Rdp
+      local:                rdp_id
+    MatrixGroup:
+      class:    Matrix
+      local:    submatrix_id
+      onDelete: SET NULL
+    Matrix:
+      local:    matrix_id
+      onDelete: SET NULL
+
+# Serve a tener traccia di cosa è stato aggiunto alle sezioni di
+# offerta
+OfferSectionSource:
+  columns:
+    offer_section_id:
+      type: integer
+      notnull: true
+    packet_id:
+      type: integer
+    determination_id:
+      type: integer
+    # prezzo offerto
+    price:
+      type: decimal
+      scale: 2
+  relations:
+    Determination:
+      local: determination_id
+      onDelete: CASCADE
+    Packet:
+      local: packet_id
+      onDelete: CASCADE
+    OfferSection:
+      local: offer_section_id
+      foreignAlias: Source
+      onDelete: CASCADE
+
+# Ordine
+Order:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    numero:
+      type: string(32)
+      unique: true
+    note:
+      type: clob
+    billing_options:
+      type:     enum
+      values:   ['Da fatturare', 'Fatturato', 'Pagato, ma da fatturare', 'Non fatturare']
+      default:  'Da fatturare'
+    price:
+      type:   decimal
+      scale:  2
+    nota_fatturazione:
+      type: string(512)
+    bozza:
+      type: boolean
+      default: true
+    storico:
+      type: clob
+    arrived_at:
+      type: timestamp
+    billing_contact_id:
+      type: integer
+    contact_id:
+      type:     integer
+      notnull:  true
+    offer_id:
+      type: integer
+    user_id:
+      type: integer(4)
+    rdp_id:
+      type: integer
+    to_send:
+      type: boolean
+      default: true
+    accepted_at:
+      type: timestamp
+    technical_manager_id:
+      type: integer
+  relations:
+    BillingContact:
+      class: ContactAddress
+      local: billing_contact_id
+    Contact:
+      local: contact_id
+    Offer:
+      foreignAlias: Offers
+    Samples:
+      type:     many
+      class:    Sample
+      local:    id
+      foreign:  order_id
+      cascade:  [delete]
+    User:
+      class: sfGuardUser
+      local: user_id
+    Rdp:
+      class: Rdp
+      local: rdp_id
+    TechnicalManager:
+      class:    User
+      local:    technical_manager_id
+  tableName: order_table
+
+# Ente che crea i metodi: tipo APAT, EPA...
+Organization:
+  columns:
+    name:                   { type: string(255) }
+    short_name:             { type: string(255) }
+    notes:                  { type: clob }
+
+# Pacchetto
+# Un pacchetto di controlli può contenere pacchetti
+Packet:
+  columns:
+    name:                   { type: string(255), unique: true }
+    law_reference:          { type: string(1024) }
+    note:                   { type: clob }
+    price:                  { type: decimal, scale: 2 }         # costo
+    report_title:           { type: string(255) }
+    is_proto:               { type: boolean, default: false }
+    unconfirmed:            { type: boolean, default: false }
+    department_id:          { type: integer }
+    limits_group_id:        { type: integer }
+  relations:
+    LimitsGroup:
+      local:                limits_group_id
+    Children:
+      class:                Packet
+      refClass:             PacketPacket
+      local:                parent_packet_id
+      foreign:              packet_id
+    Department:
+      local:                department_id
+      foreignAlias:         Packets
+
+#
+PacketPacket:
+  columns:
+    parent_packet_id:       { type: integer, primary: true }
+    packet_id:              { type: integer, primary: true }
+
+# Rapporto di prova
+Rdp:
+  columns:
+    name:                     string(255)
+    inc:                      { type: boolean, default: false }
+    um:                       { type: boolean, default: false }
+    loq:                      { type: boolean, default: false }
+    lod:                      { type: boolean, default: false }
+    limit_value:              { type: boolean, default: false }
+    rec:                      { type: boolean, default: false }
+    note:                     { type: boolean, default: false }
+    start_end:                { type: boolean, default: false }
+
+#
+ReportColumn:
+  actAs:
+    Sluggable:
+      fields:               [ name ]
+    Timestampable:          ~
+  columns:
+    name:                   { type: string(255) }
+    description:            { type: clob }
+
+# Campione
+Sample:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    numero:
+      type: string(32)
+      unique: true
+    order_id:
+      type: integer
+      notnull: true
+    bozza:
+      type: boolean
+      default: true
+    sample_type_id:
+      type: integer
+    gruppo_matrice:
+      type: integer
+    matrix_id:
+      type: integer
+    codcliente: # questo lo stampiamo sull'etichetta
+      type: string(255)
+    descrizione:
+      type: string(255)
+    ## campionamento
+    data_campionamento:
+      type: date
+    ora_campionamento:
+      type: time
+    acuradi:
+      type: enum
+      values: ['Laboratorio', 'Cliente', 'Terzi']
+    metodo_campionamento:
+      type: string(255)
+    punto_campionamento:
+      type: string(255)
+    campionatore:
+      type: string(255)
+    luogo_campionamento:
+      type: string(255)
+    note_campionamento:
+      type: string(255)
+    ## prelievo
+    data_prelievo:
+      type: date
+    ora_prelievo:
+      type: time
+    fine_prelievo:
+      type: time
+    prelevato_da:
+      type: enum
+      values: ['Laboratorio', 'Cliente', 'Terzi']
+    addetto_prelievo:
+      type: string(255)
+    luogo_prelievo:
+      type: string(255)
+    punto_prelievo:
+      type: string(255)
+    note_prelievo:
+      type: string(255)
+    ## ritiro
+    data_ritiro:
+      type: date
+    ritirato_da:
+      type: enum
+      values: ['Laboratorio', 'Cliente', 'Terzi']
+    ritiratore:
+      type: string(255)
+    luogo_ritiro:
+      type: string(255)
+    ## dettagli
+    temperatura:
+      type: string(3)
+    stampa_temperatura:
+      type: boolean
+      default: false
+    is_adequate:
+      type: boolean
+      default: true
+    condizioni:
+      type: string(255)
+    data_scadenza:
+      type: date
+    trasportatore:
+      type: enum
+      values: ['Azienda', 'Cliente', 'Corriere']
+    trasporto:
+      type: enum
+      values: ['Refrigerato', 'Temperatura ambiente']
+    notalab:
+      type: string(1024)
+    notardp:
+      type: clob
+    storico:
+      type: clob
+    conforme:
+      type: boolean
+      default: true
+    stato:
+      type: integer(1)
+    urgency:
+      type:     integer(1)
+      default:  4
+    supplement_number:
+      type: integer
+    early:
+      type: boolean
+      default: false
+    place_execution_test:
+      type: string(1024)
+    bill_id:
+      type: integer
+    price:
+      type: decimal
+    rdp_id:
+      type: integer
+    printed:
+      type: boolean
+      default: false
+    unlocked:   # campione sbloccato dal commerciale
+      type: boolean
+      default: false
+    limits_group_id:
+      type: integer
+  relations:
+    Determinations:
+      type:     many
+      class:    Determination
+      local:    id
+      foreign:  sample_id
+    LimitsGroup:
+      local:    limits_group_id
+      onDelete: SET NULL
+    MatrixGroup:
+      class:    Matrix
+      local:    gruppo_matrice
+      onDelete: SET NULL
+    Matrix:
+      local:    matrix_id
+      onDelete: SET NULL
+    SampleType:
+      local: sample_type_id
+    Rdp:
+      class: Rdp
+      local: rdp_id
+
+# Allegato di un campione
+SampleFile:
+  columns:
+    file:                   { type: string(255) }
+    description:            { type: string(1024) }
+    certificate:            { type: boolean, default: false }
+    sample_id:              { type: integer }
+  relations:
+    Sample:
+      foreignAlias:         Files
+      onDelete:             CASCADE
+
+# Contiene i prezzi di pacchetti o controlli del campione
+SampleSource:
+  columns:
+    sample_id:
+      type: integer
+      notnull: true
+    packet_id:
+      type: integer
+    determination_id:
+      type: integer
+    # prezzo offerto
+    price:
+      type: decimal
+      scale: 2
+  relations:
+    Determination:
+      local: determination_id
+      onDelete: CASCADE
+    Packet:
+      local: packet_id
+      onDelete: CASCADE
+    Sample:
+      local: sample_id
+      foreignAlias: Sources
+      onDelete: CASCADE
+
+# Tipo di campione, quello al quale associame le etichette delle
+# matrici di ogni singolo reparto
+SampleType:
+  columns:
+    name:                   { type: string(255) }
+    matrixes:               { type: clob }        # non usato
+    description:            { type: clob }
+    notes:                  { type: clob }
+    # TODO: eliminare
+    sample_category_id:     { type: integer }
+  relations:
+    Matrices:
+      class: Matrix
+      foreignAlias: SampleTypes
+      refClass: MatrixSampleType
+      local: sample_type_id
+      foreign: matrix_id
+
+# Prefissi del sistema internazionale di misura
+SIPrefix:
+  columns:
+    name:                   { type: string(255) }
+    prefix:                 { type: string(64) }
+    multiplier:             { type: decimal(40), scale: 20 }
+    # esponente da dare a 10
+    exponent:               { type: float }
+
+# Reparto: etichetta per i metodi
+Unit:
+  columns:
+    name:                     { type: string(255) }
+    code:                     { type: string(8) }
+
+# Unità di misura
+UnitOfMeasurement:
+  columns:
+    name:                   { type: string(255) }
+    symbol:                 { type: string(64) }
+
+# Utente del sistema
+User:
+  tableName:                  systemUser
+  columns:
+    name:                   { type: string(255) }
+    surname:                { type: string(255) }
+    email:                  { type: string(255), email: true }
+    tel_number:             { type: string(255) }
+    in_sales:               { type: boolean, default: false }
+    is_sales_secretary:     { type: boolean, default: false }
+    is_technical_manager:   { type: boolean, default: false }
+    guard_user_id:          { type: integer(4) }
+    department_id:          { type: integer }
+    sales_manager_id:       { type: integer }
+    sales_secretary_id:     { type: integer }
+    technical_manager_id:   { type: integer }
+  relations:
+    GuardUser:
+      local:              guard_user_id
+      class:              sfGuardUser
+      foreignAlias:       Profile
+      onDelete:           CASCADE
+      foreign:            id
+      foreignType:        one
+    Department:
+      local:              department_id
+      foreignAlias:       Users
+    SalesManager:
+      class:                User
+      local:                sales_manager_id
+    SalesSecretary:
+      class:                User
+      local:                sales_secretary_id
+    TechnicalManager:
+      class:                User
+      local:                technical_manager_id

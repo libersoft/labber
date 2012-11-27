@@ -1,0 +1,423 @@
+/* 
+    Document   : icons
+    Created on : Dec 16, 2009, 10:17:26 AM
+    Author     : orontobate
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.icon-small-locked {
+  background: url("../images/signinSuccessIcons/locked.png") 0 4px no-repeat !important;
+}
+
+.icon-medium-key {
+  background-image: url("../images/signinSuccessIcons/key.png") !important;
+}
+
+.icon-small-report {
+  background-image: url("../images/icons/report.png") !important;
+}
+
+.icon-small-refresh {
+  background-image: url("../images/icons/arrow-circle-double-135.png") !important;
+}
+
+.icon-small-save {
+  background-image: url("../images/icons/disk--pencil.png") !important;
+}
+
+.icon-small-home {
+  background-image: url("../images/icons/home.png") !important;
+}
+
+.icon-small-users, .icon-small-utenti, .icon-small-group, .icon-small-dipendenti {
+  background-image: url("../images/icons/users.png") !important;
+}
+
+.icon-small-flask {
+  background-image: url("../images/icons/flask.png") !important;
+}
+
+/*.icon-small-menu {
+  background-image: url("../images/icons/tab_go.png") !important;
+}*/
+
+.icon-small-document-invoice {
+  background-image: url("../images/icons/document-invoice.png") !important;
+}
+
+.icon-small-document-export {
+  background-image: url("../images/icons/document-export.png") !important;
+}
+
+.icon-small-bomb {
+  background-image: url("../images/icons/bomb.png") !important;
+}
+
+.icon-small-add {
+  background-image: url("../images/icons/plus.png") !important;
+}
+
+.icon-small-euro, .icon-small-consulenti {
+  background-image: url("../images/icons/currency-euro.png") !important;
+}
+
+.icon-small-cross {
+  background-image: url("../images/icons/cross.png") !important;
+}
+
+.icon-small-clienti, .icon-small-customer {
+  background-image: url("../images/icons/building.png") !important;
+}
+
+.icon-small-files {
+  background-image: url("../images/icons/documents.png") !important;
+}
+
+.icon-small-arrow-180 {
+  background-image: url("../images/icons/arrow-180.png") !important;
+}
+
+.icon-small-arrow {
+  background-image: url("../images/icons/arrow.png") !important;
+}
+
+.icon-small-document-copy {
+  background-image: url("../images/icons/document-copy.png") !important;
+}
+
+.icon-small-building-low {
+  background-image: url("../images/icons/building-low.png") !important;
+}
+
+.icon-small-user {
+  background-image: url("../images/icons/user.png") !important;
+}
+
+.icon-small-jar-empty {
+  background-image: url("../images/icons/jar-empty.png") !important;
+}
+
+.icon-small-beaker-empty, .icon-small-determination {
+  background-image: url("../images/icons/beaker-empty.png") !important;
+}
+
+.icon-small-magnifier {
+  background-image: url("../images/icons/magnifier.png") !important;
+}
+
+.icon-small-clipboard-text {
+  background-image: url("../images/icons/clipboard-text.png") !important;
+}
+
+.icon-small-broom {
+  background-image: url("../images/icons/broom.png") !important;
+}
+
+.icon-small-book-brown {
+  background-image: url("../images/icons/book-brown.png") !important;
+}
+
+.icon-small-box {
+  background-image: url("../images/icons/box.png") !important;
+}
+
+.icon-small-book-open {
+  background-image: url("../images/icons/book-open.png") !important;
+}
+
+.icon-small-book {
+  background-image: url("../images/icons/book.png") !important;
+}
+
+.icon-small-clipboard-task {
+  background-image: url("../images/icons/clipboard-task.png") !important;
+}
+
+.icon-small-screwdriver {
+  background-image: url("../images/icons/screwdriver.png") !important;
+}
+
+.icon-small-minus, .icon-small-remove {
+  background-image: url("../images/icons/minus.png") !important;
+}
+
+.icon-small-printer {
+  background-image: url("../images/icons/printer.png") !important;
+}
+
+.icon-small-cross-script {
+  background-image: url("../images/icons/cross-script.png") !important;
+}
+
+.icon-small-ok {
+  background-image: url("../images/icons/tick.png") !important;
+}
+
+.icon-small-script {
+  background-image: url("../images/icons/script.png") !important;
+}
+
+.icon-small-key {
+  background-image: url("../images/icons/key.png") !important;
+}
+
+.icon-small-door-open-out, .icon-logout {
+  background-image: url("../images/icons/door-open-out.png") !important;
+}
+
+.icon-small-commerciale {
+  background-image: url("../images/icons/money-coin.png") !important;
+}
+
+.icon-small-department {
+  background-image: url("../images/icons/door.png") !important;
+}
+
+.icon-small-stamp, .icon-small-approva {
+  background-image: url("../images/icons/stamp.png") !important;
+}
+
+.icon-small-eraser, .icon-small-azzera {
+  background-image: url("../images/icons/eraser.png") !important;
+}
+
+.icon-small-wooden-box--plus, .icon-small-da-pacchetto {
+  background-image: url("../images/icons/wooden-box--plus.png") !important;
+}
+
+.icon-small-wand, .icon-small-wizard {
+  background-image: url("../images/icons/wand--plus.png") !important;
+}
+
+.icon-small-node-insert {
+  background-image: url("../images/icons/node-insert.png") !important;
+}
+
+.icon-small-node-delete {
+  background-image: url("../images/icons/node-delete.png") !important;
+}
+
+.icon-small-node-insert-next {
+  background-image: url("../images/icons/node-insert-next.png") !important;
+}
+
+.icon-small-node-insert-previous {
+  background-image: url("../images/icons/node-insert-previous.png") !important;
+}
+
+.icon-small-hourglass {
+  background-image: url("../images/icons/hourglass.png") !important;
+}
+
+.icon-small-table-money, .icon-small-offer {
+  background-image: url("../images/icons/table-money.png") !important;
+}
+
+.icon-small-table-select-row, .icon-small-offer-section {
+  background-image: url("../images/icons/table-select-row.png") !important;
+}
+
+.icon-small-table-insert-row {
+  background-image: url("../images/icons/table-insert-row.png") !important;
+}
+
+.icon-small-calendar-task {
+  background-image: url("../images/icons/calendar-task.png") !important;
+}
+
+.icon-small-ui-layout-panel, .icon-composite {
+  background-image: url("../images/icons/ui-layout-panel.png") !important;
+}
+
+.icon-small-script-stamp {
+  background-image: url("../images/icons/script-stamp.png") !important;
+}
+
+.icon-small-broom {
+  background-image: url("../images/icons/broom.png") !important;
+}
+
+.icon-next-day {
+  background-image: url("../images/icons/calendar-next.png") !important;
+}
+
+.icon-previous-day {
+  background-image: url("../images/icons/calendar-previous.png") !important;
+}
+
+.icon-report {
+  background-image: url("../images/icons/report--pencil.png") !important;
+}
+
+.icon-beaker-pencil {
+  background-image: url("../images/icons/beaker--pencil.png") !important;
+}
+
+.icon-wall-brick, .icon-limitsgroup {
+  background-image: url("../images/icons/wall-brick.png") !important;
+}
+
+.icon-wall--exclamation, .icon-limit {
+  background-image: url("../images/icons/wall--exclamation.png") !important;
+}
+
+.icon-wall--pencil, .icon-setlimits {
+  background-image: url("../images/icons/wall--pencil.png") !important;
+}
+
+.icon-tags, .icon-denominationsGroup {
+  background-image: url("../images/icons/tags.png") !important;
+}
+
+.icon-method, .icon-blue-document--pencil {
+  background-image: url("../images/icons/blue-document--pencil.png") !important;
+}
+
+.icon-method-copy, .icon-blue-document-copy {
+  background-image: url("../images/icons/blue-document-copy.png") !important;
+}
+
+.icon-add-protopacket, .icon-box--plus {
+  background-image: url("../images/icons/box--plus.png") !important;
+}
+
+.icon-offer-copy, .icon-tables {
+  background-image: url("../images/icons/tables.png") !important;
+}
+
+.icon-confirm, .icon-thumb-up {
+  background-image: url("../images/icons/thumb-up.png") !important;
+}
+
+.icon-rule {
+  background-image: url("../images/icons/equalizer.png") !important;
+}
+
+.icon-rule-copy {
+  background-image: url("../images/icons/equalizers.png") !important;
+}
+
+.icon-sample-copy {
+  background-image: url("../images/icons/jars.png") !important;
+}
+
+.icon-bills, .icon-sort-price {
+  background-image: url("../images/icons/sort-price.png") !important;
+}
+
+.icon-sampling-method, .icon-pipette {
+  background-image: url("../images/icons/pipette.png") !important;
+}
+
+.icon-configurations, .icon-gear {
+  background-image: url("../images/icons/gear.png") !important;
+}
+
+.icon-sampling-place, .icon-truck {
+  background-image: url("../images/icons/truck.png") !important;
+}
+
+.icon-root, .icon-node-select {
+  background-image: url("../images/icons/node-select.png") !important;
+}
+
+.icon-document-plus, .icon-upload-file {
+  background-image: url("../images/icons/document--plus.png") !important;
+}
+
+.icon-paper-clip {
+  background-image: url("../images/icons/paper-clip.png") !important;
+}
+
+.icon-small-lock-unlock, .icon-unlock {
+  background-image: url("../images/icons/lock-unlock.png") !important;
+}
+
+
+/**
+ * Icone di pH.Lab
+ */
+.icon-tree-folder {
+    background: url("../js/ext/resources/images/default/tree/folder-open.gif") !important;
+}
+
+.icon-magnifier-left {
+    background-image: url("../images/icons/magnifier-left.png") !important;
+}
+
+.icon-packet {
+    background-image: url("../images/icons/packet.png") !important;
+}
+
+.icon-matrix {
+    background-image: url("../images/icons/matrix.png") !important;
+}
+
+.icon-denomination {
+    background-image: url("../images/icons/denomination.png") !important;
+}
+
+.icon-fieldType {
+    background-image: url("../images/icons/fieldType.png") !important;
+}
+
+.icon-methodConstant {
+    background-image: url("../images/icons/methodConstant.png") !important;
+}
+
+.icon-formulaDataType {
+    background-image: url("../images/icons/formulaDataType.png") !important;
+}
+
+.icon-sampleType {
+    background-image: url("../images/icons/sampleType.png") !important;
+}
+
+.icon-analyticalTechnique {
+    background-image: url("../images/icons/analyticalTechnique.png") !important;
+}
+
+.icon-reportColumn {
+    background-image: url("../images/icons/reportColumn.png") !important;
+}
+
+.icon-organization {
+    background-image: url("../images/icons/organization.png") !important;
+}
+
+.icon-unitOfMeasurement {
+    background-image: url("../images/icons/unitOfMeasurement.png") !important;
+}
+
+.icon-car {
+  background-image: url("../images/icons/car.png") !important;
+
+}
+
+.icon-choose_rdp {
+  background-image: url("../images/icons/document-table.png") !important;
+
+}
+
+.icon-cross_circle {
+  background: url("../images/icons/cross-circle.png") center no-repeat !important;
+
+}
+.icon-tick_circle {		
+  background: url("../images/icons/tick-circle.png") center no-repeat !important;
+
+}
+.icon-disc {
+  background: url("../images/icons/disc--plus.png") center no-repeat !important;
+
+}

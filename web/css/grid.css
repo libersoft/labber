@@ -1,0 +1,37 @@
+.x-grid3-cell-note {
+    background: url(../images/cell-note.png) no-repeat;
+}
+
+.determination-grid-fuoritempo {
+    background-color: #ffcccc;
+}
+
+.determination-grid-incompleto {
+    background-color: #ffffcc;
+}
+
+.determinationType-grid-sinal {
+    background-color: #ccffcc;
+    background-image: url(../images/accredia.ico);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.determinationType-grid-default .x-grid3-cell-inner {
+    font-weight: bold !important;
+}
+
+.laboratorio-determination-grid-nonconforme {
+    background-color: #ff6666;
+}
+
+.contact-grid-lock {
+    background-color: #ffefef;
+    background-image: url(../images/icons/lock.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.method-grid-displaynone {
+    visibility: hidden;
+}

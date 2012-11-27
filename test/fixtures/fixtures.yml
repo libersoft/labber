@@ -1,0 +1,42 @@
+Packet:
+  p1:
+    name: 'Pacchetto 0'
+
+Denomination:
+  d1:
+    name: 'Denominazione 0'
+
+Organization:
+  o1:
+    name: 'Organizzazione 0'
+
+Method:
+  method0:
+    sinal_name:   'Metodo 0'
+    Organization: o1
+
+Contact:
+  contact0:
+    name:         'Contatto 0'
+
+Order:
+  bozza0:
+    numero:       bozza-0
+    Contact:      contact0
+  vecchio_ordine:
+    numero:       '00-0000'
+    Contact:      contact0
+    bozza:        false
+    accepted_at:  '2005-12-01 00:00:00'
+
+Sample:
+  vecchio_campione:
+    numero:       '00-000000'
+    Order:        vecchio_ordine
+
+LimitsGroup:
+  tabella:
+    name:           'Tabella 0'
+  tabella_certificata:
+    name:           'Tabella 1'
+    certified_name: 'Tabella certificata'

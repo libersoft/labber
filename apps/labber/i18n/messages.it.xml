@@ -1,0 +1,207 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+    <file original="global" source-language="en_US" datatype="plaintext">
+        <body>
+            <trans-unit id="1">
+                <source>Name</source>
+                <target>Nome</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Surname</source>
+                <target>Cognome</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Sample type</source>
+                <target>Tipo di campione</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Price</source>
+                <target>Prezzo</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Denomination</source>
+                <target>Denominazione</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Method</source>
+                <target>Metodo</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Unit of measurement</source>
+                <target>Unità di misura</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Matrix</source>
+                <target>Matrice</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Cost</source>
+                <target>Costo</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Law reference</source>
+                <target>Riferimento legislativo</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Title</source>
+                <target>Titolo</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Packet</source>
+                <target>Pacchetto</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Open</source>
+                <target>Apri</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Delete</source>
+                <target>Cancella</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Edit</source>
+                <target>Modifica</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Matrixes</source>
+                <target>Matrici</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Description</source>
+                <target>Descrizione</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Type</source>
+                <target>Tipo</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Position</source>
+                <target>Posizione</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Telephone</source>
+                <target>Telefono</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Mobile</source>
+                <target>Cellulare</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Born date</source>
+                <target>Data Nascita</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Born where</source>
+                <target>Luogo di Nascita</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Synced</source>
+                <target>Ultimo sincro</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>Not active</source>
+                <target>Non attivo</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Revision</source>
+                <target>Revisione</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Denominations</source>
+                <target>Denominazioni</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>Matrixes</source>
+                <target>Matrici</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Action</source>
+                <target>Azione</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Department</source>
+                <target>Reparto</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>Notes</source>
+                <target>Note</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>Year</source>
+                <target>Anno</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>Number</source>
+                <target>Numero</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>Customer_id</source>
+                <target>Cliente</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>Customer</source>
+                <target>Cliente</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>Code</source>
+                <target>Codice</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>Split sample number</source>
+                <target>Numero di aliquote</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>Analytical technique</source>
+                <target>Tecnica analitica</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>Symbol</source>
+                <target>Simbolo</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>Protocol number</source>
+                <target>Numero di protocollo</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>Customer</source>
+                <target>Cliente</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>Creation date</source>
+                <target>Data di creazione</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>Order</source>
+                <target>Ordine</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>State</source>
+                <target>Stato</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>Rule</source>
+                <target>Regola</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>Status</source>
+                <target>Stato</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>Priority</source>
+                <target>Priorità</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>Split sample</source>
+                <target>Aliquota</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>Next status</source>
+                <target>Stato successivo</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>Category</source>
+                <target>Categoria</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

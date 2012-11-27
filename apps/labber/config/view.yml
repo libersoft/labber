@@ -1,0 +1,32 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Labber
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:
+    - ../js/ext/resources/css/ext-all.css
+    - icons.css
+    - ../js/ext/examples/ux/fileuploadfield/css/fileuploadfield.css
+    - CheckTreePanel.css
+    - flash.css
+    - grid.css
+    - igcalng-custom.css
+    # grid filter plugin
+    - ../js/ext/examples/ux/gridfilters/css/GridFilters.css
+    - ../js/ext/examples/ux/gridfilters/css/RangeMenu.css
+    # TreeGrid
+    - ../js/ext/examples/ux/treegrid/treegrid.css
+    - ../js/ext/examples/ux/css/MultiSelect.css
+    - ../js/ext/examples/ux/statusbar/css/statusbar.css
+
+  has_layout:     true
+  layout:         layout

@@ -1,0 +1,12 @@
+[submodule "lib/vendor/symfony"]
+	path = lib/vendor/symfony
+	url = https://github.com/symfony/symfony1.git
+[submodule "web/js/ext"]
+	path = web/js/ext
+	url = https://github.com/probonogeek/extjs.git
+[submodule "plugins/sfCombinePlugin"]
+	path = plugins/sfCombinePlugin
+	url = https://github.com/heristop/sfCombinePlugin.git
+[submodule "plugins/csDoctrineActAsSortablePlugin"]
+	path = plugins/csDoctrineActAsSortablePlugin
+	url = git://github.com/bshaffer/csDoctrineActAsSortablePlugin.git

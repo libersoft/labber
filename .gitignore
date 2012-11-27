@@ -1,0 +1,23 @@
+# Symfony
+cache/*
+log/*
+config/databases.yml
+config/ProjectConfiguration.class.php
+
+# Doctrine
+lib/doctrine.compiled.php
+data/sql/
+base/
+
+# Symfony web
+web/.htaccess
+web/sf
+web/*Plugin
+web/uploads/*
+
+# PEAR plugins
+plugins/.*
+
+# dsExtDirectPlugin
+extdirect_api.*
+web/extdirect.php

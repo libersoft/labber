@@ -1,0 +1,105 @@
+test:
+  businesslogic:
+    order_number_format: %1$d-%2$04s
+    sample_number_format: %1$d-%2$06s
+
+dev:
+  sfCombinePlugin:
+    enabled:        false         # disable the plugin in development
+
+all:
+  ds_ext_direct_plugin:
+    action_namespace: Lab
+    full_exceptions: true
+    include_plugins:
+      - lsLabberPlugin
+      - lsLabberPrintProPlugin
+
+  sf_guard_plugin:
+    remember_key_expiration_age:  28800
+    remember_cookie_name:         labber_rimembrami
+
+  path:
+    rdp:            data/rdp/
+    offer:          data/offer/
+    order_detail:   data/order_detail/
+    bill_detail:    data/bill_detail/
+    acceptance:     data/acceptance/
+    analysis_task:  data/analysis_task/
+
+  install_id: labber
+  dev_default_user: admin
+  unoconv_listen: 127.0.0.1
+  unoconv_port: 9133
+  sf_tiny_doc_plugin:
+    zip_method:    ziparchive        # the method to zip/unzip : shell | ziparchive
+    zip_bin:       zip               # the binary to zip   for 'shell' method
+    unzip_bin:     unzip             # the binary to unzip for 'shell' method
+    process_dir:   %SF_WEB_DIR%/tmp  # the process directory
+  organization:
+    name: Laboratorio Chimico S.r.l.
+    fax: 0123 456 789
+    header: |
+      Laboratorio Chimico S.r.l.
+      20100 Milano · Via Roma, 1
+      Tel. 0123 456 780 · Fax 0123 456 789
+      www.labber.it · info@labber.it
+
+  businesslogic:
+    order_number_format: %1$d-%2$04s
+    sample_number_format: %2$06s-%1$d
+
+  sfCombinePlugin:
+    enabled:        true          # enabling the plugin will combine script and css files into a single file
+    asset_version:  0             # key to the asset version
+    client_cache_max_age: 10      # enable the browser to keep a copy of the files for x days (false to disable)
+    gzip:           true          # allow PHP gzipping of the combined JavaScript and CSS files to reduce bandwidth usage
+    url_type:       key           # can be key, files, or base64 (note files can be buggy without an asset version)
+    filter_include_unused_groups: true # whether to use the filter to include groups that havent been output
+    timestamp:
+      enabled: true               # suffix a timestamp where available to files for their asset version
+      uncombinable: true          # timestamp files that aren't combinable
+    js:
+      combine: true               # whether or not to perform combining actions
+      combine_skip: ~             # these files will not be combined (necessary when js code is based on js file name)
+      include: true               # whether to allow the including of files
+      include_suffixes:           # suffixes of files that can be included
+          - .php
+      include_skip: ~             # files that should be skipped on includes
+      minify:       true          # process js files to shrink them
+      minify_method: [sfCombineMinifierJsMin, minify]
+      minify_method_options: []
+      minify_skip_suffixes:       # files with this suffix will not be minified
+          - .min.js
+      minify_skip:                # these files will not be minified (useful when code is already minified)
+          - /js/ext/ext-all.js
+          - /js/ext/adapter/ext/ext-base.js
+      filename_comments: false    # include filenames of combined files in comments
+      group_files: true           # minify all available files together in one minify action
+      cache_minified_files: true  # cache minified versions of files (to not minify multiple times)
+      route: sfCombineJs          # the route name js files will use
+      inline_minify_method: ~
+      inline_minify_method_options: ~
+    css:
+      combine: true               # whether or not to perform combining actions
+      combine_skip: ~             # these files will not be combined
+      include: true               # whether to allow the including of files
+      include_suffixes:           # suffixes of files that can be included
+          - .php
+      include_skip: ~             # files that should be skipped on includes
+      minify:       true          # process js files to shrink them
+      minify_method: [sfCombineMinifierCssMin, minify]
+      minify_method_options: []
+      minify_skip_suffixes:       # files with this suffix should not be minified
+          - .min.css
+      minify_skip: ~              # these files will not be minified (useful when code is already minified)
+      filename_comments: false    # include filenames of combined files in comments
+      group_files: true           # minify all available files together in one minify action
+      route: sfCombineCss         # the route name css files will use
+      cache_minified_files: true  # cache minified versions of files (to not minify multiple times)
+      keep_charset: true          # if there is a charset in a css file keep it
+      prepend_imports: true       # move all imports to the top of a css file
+      prepend_imports_warning:    # if imports are moved a warning to output
+        Imports may be incorrectly placed, please remove for ideal combining
+      inline_minify_method: ~
+      inline_minify_method_options: ~
